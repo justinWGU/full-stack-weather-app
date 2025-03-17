@@ -2,7 +2,7 @@ import React from "react";
 
 
 const Weather = ({ data }) => {
-// This component represents each weather instance
+// Represents each weather instance.
 
 
     if (data) { 

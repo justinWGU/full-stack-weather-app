@@ -1,7 +1,7 @@
 import React from "react";
 
 const InputBox = ({ handleSubmit, handleChange, city }) => {
-
+// Handles input box for entering city.
 
     return (
         <div>

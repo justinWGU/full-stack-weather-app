@@ -2,39 +2,15 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import InputBox from './InputBox.js';
 import Weather from './Weather.js';
+import LogIn from './LogIn.js';
 
-
-// const Test = () => {
-//   const [test, setTest] = useState([null]);
-
-//   const handleClick = (event) => {
-//     event.preventDefault();
-
-//     fetch("http://127.0.0.1:8000/core/register/", {method: 'POST'})
-//     .then(response => response.json())
-//     .then(json => setTest(json))
-//     .catch(errors => console.error(errors));
-//   }
-
-//   return (
-//     <div>
-//     <p>Test data: {test.username} {test.password}</p>
-//     <button onClick={handleClick}>Test Button</button>
-//     </div>
-//   );
-// }
 
 const App = () => {
+  // Main app that establishes core logic. 
+
   const [data, setData] = useState(null);
   const [city, setCity] = useState(null);
-  const [isAuth, setAuth] = useState(null);
-
-  // useEffect(() => {
-  //   fetch(url)
-  //   .then(response => response.json())
-  //   .then(json => setData(json))
-  //   .catch(errors => console.error(errors))
-  // }, []);
+  const [isAuth, setAuth] = useState(false);
 
   const handleChange = (event) => {
     const newCity = event.target.value;
@@ -55,9 +31,9 @@ const App = () => {
     setCity(null);
   }
 
-  if (!isAuth) {
+  if (!sAuth) {
     return (
-      <Authenticate></Authenticate>
+      <LogIn setAuth={setAuth}></LogIn>
     );
   }
 
