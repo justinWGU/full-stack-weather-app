@@ -1,6 +1,8 @@
 from . import views
 from django.urls import path
+from rest_framework.authtoken import views as drf_views
 
 urlpatterns = [
     path("test/", views.user_view),
+    path("signin/", drf_views.obtain_auth_token, name="signin") # credentials are authed in exchange for a token
 ]
