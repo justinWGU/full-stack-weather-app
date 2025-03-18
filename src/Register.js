@@ -1,12 +1,14 @@
 import React from "react";
 
 
-const Register = () => {
+const Register = ({ handleRegisterClick}) => {
 // Represents sign up page for first time users.
 
     return (
         <div>
-            <p>Sign up page</p>
+            <h1>Sign up page</h1>
+            <p>Already have an account?</p>
+            <button onClick={handleRegisterClick}>Log in</button>
         </div>
     );
 }
