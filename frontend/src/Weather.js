@@ -4,7 +4,6 @@ import React from "react";
 const Weather = ({ data }) => {
 // Represents each weather instance.
 
-
     if (data) { 
         return (
             <div style={{display: "inline-block"}}>

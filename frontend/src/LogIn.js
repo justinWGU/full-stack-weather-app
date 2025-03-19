@@ -1,50 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Ingests login info and authenticates with a backend.
-const LogIn = ({ handleClick }) => {
-
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
-
-
-    const handleChange = (event) => {
-        
-        const inputSource = event.target.name;
-        const newInputValue = event.target.value;
-
-        if (inputSource === "username") {
-            setUsername(newInputValue);
-        } else {
-            setPassword(newInputValue);
-        }
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(`Username: ${username} and password submitted.`)
-
-        
-        // depending on server response change isAuth state
-        // if (response !=== goo) {
-        //     alert("Username and password not found.")
-        // } else {
-        //     setAuth(true);
-        // }
-
-        setPassword(null);
-        setUsername(null);
-
-        }
+const LogIn = ({ handleClick, changeLogIn, submitLogIn, username, password}) => {
 
     return (
         <div>
             <h1>Login Page</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={submitLogIn}>
                 <label>Enter username:</label>
-                <input type="text" value={username || ""} name="username" onChange={handleChange}></input>
+                <input type="text" value={username || ""} name="username" onChange={changeLogIn}></input>
                 <label>Enter password:</label>
-                <input type="password" value={password || ""} name="password" onChange={handleChange}></input>
-                <button type="submit" onSubmit={handleSubmit} style={{display: "inline-block"}}>submit</button>
+                <input type="password" value={password || ""} name="password" onChange={changeLogIn}></input>
+                <button type="submit" style={{display: "inline-block"}}>submit</button>
             </form>
 
             <p>Need to create an account?</p>
