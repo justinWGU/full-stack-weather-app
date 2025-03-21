@@ -1,5 +1,5 @@
 import React from "react";
-
+import '../css/style.css';
 
 const Weather = ({ data }) => {
 // Represents each weather instance.
@@ -7,7 +7,7 @@ const Weather = ({ data }) => {
     // TODO: implement favorite & del button
     if (data) { 
         return (
-            <div style={{paddingTop:"25px"}} className="grid text-center">
+            <div className="grid text-center weather-div">
                 <p>City: {data.location.name}</p>
                 <p>State: {data.location.region}</p>
                 <p>Country: {data.location.country}</p>

@@ -1,4 +1,5 @@
 import React from "react";
+import '../css/style.css';
 
 const InputBox = ({ handleSubmit, handleChange, city }) => {
 // Handles input box for entering city.
@@ -10,7 +11,7 @@ const InputBox = ({ handleSubmit, handleChange, city }) => {
                 <label className="col-form-label">Enter city name</label>
                 <input className="form-text" type="text" value={city || ""} name="cityName" onChange={handleChange}></input>
             </div>
-            <div style={{paddingLeft: "23px"}}>
+            <div className="city-button"> 
             <button className="btn btn-primary" type="submit">submit</button>
             </div>
             </form>

@@ -1,4 +1,5 @@
 import React from "react";
+import '../css/style.css';
 
 // Ingests login info and authenticates with a backend.
 const LogIn = ({ handleClick, changeLogIn, submitLogIn, username, password}) => {
@@ -15,11 +16,11 @@ const LogIn = ({ handleClick, changeLogIn, submitLogIn, username, password}) => 
                     <label className="form-text">Enter password</label>
                     <input className="form-text" type="password" value={password || ""} name="password" onChange={changeLogIn}></input>
                 </div>
-                <div style={{paddingTop: "10px"}}>
-                    <button className="btn btn-primary" type="submit" style={{display: "inline-block"}}>submit</button>
+                <div className="submit-button">
+                    <button className="btn btn-primary" type="submit">submit</button>
                 </div>
             </form>
-                <div style={{paddingTop: "15px"}}>
+                <div className="route-button">
                     <p className="form-text">Need to create an account?</p>
                     <button className="btn btn-secondary" onClick={handleClick}>sign up</button> 
                 </div>

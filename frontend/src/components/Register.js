@@ -1,4 +1,5 @@
 import React from "react";
+import '../css/style.css';
 
 
 const Register = ({ handleRegisterClick, changeLogIn, submitRegistration, username, password, confirmPassword  }) => {
@@ -20,11 +21,11 @@ const Register = ({ handleRegisterClick, changeLogIn, submitRegistration, userna
                     <label className="form-text">Confirm password</label>
                     <input className="form-text" type="password" value={confirmPassword || ""} name="confirmPassword" onChange={changeLogIn}></input>
                 </div>
-                <div style={{paddingTop:"10px"}}>
-                <button className="btn btn-primary" type="submit" style={{display: "inline-block"}}>submit</button>
+                <div className="submit-button">
+                <button className="btn btn-primary" type="submit">submit</button>
                 </div>
             </form>
-            <div style={{paddingTop:"15px"}}>
+            <div className="route-button">
                 <p className="form-text">Already have an account?</p>
                 <button className="btn btn-secondary" onClick={handleRegisterClick}>log in</button>
             </div>
