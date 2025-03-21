@@ -1,10 +1,10 @@
 import './App.css';
 import React, { useState } from 'react';
-import InputBox from './InputBox.js';
-import Weather from './Weather.js';
-import LogIn from './LogIn.js';
-import Register from './Register.js';
-import FavCities from './FavCities.js';
+import InputBox from './components/InputBox.js';
+import Weather from './components/Weather.js';
+import LogIn from './components/LogIn.js';
+import Register from './components/Register.js';
+import FavCities from './components/FavCities.js';
 
 
 // Main app that establishes core logic. 
