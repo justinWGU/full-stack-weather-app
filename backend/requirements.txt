@@ -1,8 +1,11 @@
 asgiref==3.8.1
 Django==5.1.4
 django-cors-headers==4.7.0
+django-rest-framework==0.1.0
+django-rest-framework-auth==1.0.0
 djangorestframework==3.15.2
 psycopg==3.2.3
 python-dotenv==1.0.1
+pytz==2025.1
 sqlparse==0.5.3
 typing_extensions==4.12.2
