@@ -57,7 +57,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "config.urls"
 
-# Auth config
+# allow react connect to api via port 3000
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+# token auth config
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",

@@ -4,6 +4,7 @@ import InputBox from './InputBox.js';
 import Weather from './Weather.js';
 import LogIn from './LogIn.js';
 import Register from './Register.js';
+import FavCities from './FavCities.js';
 
 
 // Main app that establishes core logic. 
@@ -16,24 +17,26 @@ const App = () => {
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
 
 
-  // // effect to fetch user's fav cities
-  // console.log("token being sent from weather: ", token);
-  // useEffect ( () => {
-  //   fetch("http://localhost:8000/api/privileged/", {
-  //     header: {"Authorization": `Token ${token}`}
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => console.log("response from priv view: ", data))
-  //   .catch(errors => console.error("errors: ", errors));
-  // }, [])
-
-
+  
   // submits form data to backend
   const submitRegistration = (event) => {
+    
     event.preventDefault();
-   
+
+    if (!username || !password || !confirmPassword) {
+      alert("Username and password must both be entered.");
+      return;
+    }
+
+    if (!(password === confirmPassword)) {
+      alert("Passwords do not match");
+      return;
+    }
+       
+    // send api request to django server to authenticate sign up info
     try {
       fetch("http://localhost:8000/api/signup/", {
         method: "POST",
@@ -42,50 +45,56 @@ const App = () => {
       }) 
       .then(response => {
         if (response.ok) {
-          console.log(`Response "ok" from Django server, status ${response.status}`);
+          console.log("Registration successful. Response \"ok\" from Django server.");
           setRegistration(true);
           return response.json();
         }
         else {
           if (response.status === 401) alert("Username is already taken.");
-          throw new Error(`Fetch exited with http status code ${response.status}`);
+          throw new Error(`Fetch exited with http status code ${response.status}.`);
         }
       })
-      .then(data => console.log("Data: ", data))
-      .catch(errors => console.error("Promise resolved with errors:", errors));
-    }
-
+      .then(data => console.log("Response data: ", data))
+      .catch(errors => console.error("Promise resolved with errors.", errors));
+    } 
     catch {
       console.error("Promise rejected during fetch."); // catches network/CORS errors
-    }
-
+    } 
     finally {
       setPassword(null);
       setUsername(null);  
+      setConfirmPassword(null);
     }
- 
   }   
 
+  // update username & pw as user types
   const changeLogIn = (event) => {
-        
+  
     const inputSource = event.target.name;
     const newInputValue = event.target.value;
 
     if (inputSource === "username") {
         setUsername(newInputValue);
-    } else {
+    } else if (inputSource === "password") {
         setPassword(newInputValue);
+    } else {
+      setConfirmPassword(newInputValue);
     }
   }
 
 
   // submits login information to backend for authentication.
   const submitLogIn = (event) => {
-      event.preventDefault();
-      console.log(`Username: ${username} and password submitted.`)
+      
+    event.preventDefault();
 
+      if (!username || !password) {
+        alert("Username and password must both be entered.");
+        return;
+      }
+
+    // send api request to django server to authenticate sign in info
     try {
-
       fetch("http://localhost:8000/api/signin/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
@@ -93,7 +102,7 @@ const App = () => {
       })
       .then(response => {
         if (response.ok) {
-          console.log(`Response "ok" from Django server, status: ${response.status}.`);
+          console.log("Log in successful. Response \"ok\" from Django server.");
           return response.json(); 
         } 
         else {
@@ -102,17 +111,15 @@ const App = () => {
         }
       })
       .then(data => {
-        console.log("response: ", data);
+        console.log("Response data: ", data); // This should return a token.
         if (data.token) setAuth(true);
         setToken(data.token);
       })
-      .catch(errors => console.error("Promise resolved with errors:", errors));
+      .catch(errors => console.error("Promise resolved with errors.", errors));
     } 
-
     catch {
         console.error("Promise rejected during fetch."); // catches network/CORS errors
     } 
-    
     finally {
         setUsername(null);
         setPassword(null);
@@ -138,17 +145,14 @@ const App = () => {
           console.log(`Response "ok" from weather server, status: ${response.status}.`);
           return response.json(); 
         }          
-        else throw new Error(`Fetch exited with http status code ${response.status}`);
+        else throw new Error(`Fetch exited with http status code ${response.status}.`);
       })
-      .then(json => setData(json)) // try changing to data
+      .then(json => setData(json))
       .catch(errors => console.error("Promise resolved with errors:", errors));
-      
     }
-
     catch {
         console.error("Promise rejected during fetch.")
     }
-
     finally {
       setCity(null);    
     }
@@ -156,26 +160,29 @@ const App = () => {
 
   // Handles button to navigate to registration page.
   const handleClick = (event) => {
-    event.preventDefault();
+    setPassword(null);
+    setUsername(null);  
     setRegistration(false);
   }
 
   // Handles button to navigate back to login page.
   const handleRegisterClick = () => {
-    setRegistration(false);
+    setPassword(null);
+    setUsername(null);  
+    setRegistration(true);
   }
 
   // Uses state to determine if user needs to register.
   if (!isRegistered) {
     return (
-    <Register handleRegisterClick={handleRegisterClick} setRegistration={setRegistration} username={username} password={password} changeLogIn={changeLogIn} submitRegistration={submitRegistration}></Register>
+    <Register handleRegisterClick={handleRegisterClick} username={username} password={password} confirmPassword={confirmPassword} changeLogIn={changeLogIn} submitRegistration={submitRegistration}></Register>
     );
   }
 
   // Uses state to determine if user only needs to login.
   if (!isAuth) {
     return (
-      <LogIn setAuth={setAuth} handleClick={handleClick} changeLogIn={changeLogIn} submitLogIn={submitLogIn} setToken={setToken} token={token} username={username} password={password}></LogIn>
+      <LogIn handleClick={handleClick} changeLogIn={changeLogIn} submitLogIn={submitLogIn} token={token} username={username} password={password}></LogIn>
     );
   }
 
@@ -185,8 +192,7 @@ const App = () => {
     <div>
       <InputBox handleChange={handleChange} handleSubmit={handleSubmit} city={city}></InputBox>
       <Weather data={data} token={token}/> 
-      <Weather data={data} token={token}/> 
-      <Weather data={data} token={token}/> 
+      <FavCities token={token}></FavCities>
     </div>    
   );
 }

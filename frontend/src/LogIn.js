@@ -4,18 +4,25 @@ import React from "react";
 const LogIn = ({ handleClick, changeLogIn, submitLogIn, username, password}) => {
 
     return (
-        <div>
-            <h1>Login Page</h1>
+        <div className="text-center">
+            <h1>Login</h1>
             <form onSubmit={submitLogIn}>
-                <label>Enter username:</label>
-                <input type="text" value={username || ""} name="username" onChange={changeLogIn}></input>
-                <label>Enter password:</label>
-                <input type="password" value={password || ""} name="password" onChange={changeLogIn}></input>
-                <button type="submit" style={{display: "inline-block"}}>submit</button>
+                <div>
+                    <label className="form-text">Enter username</label>
+                    <input className="form-text" type="text" value={username || ""} name="username" onChange={changeLogIn}></input>
+                </div>
+                <div>
+                    <label className="form-text">Enter password</label>
+                    <input className="form-text" type="password" value={password || ""} name="password" onChange={changeLogIn}></input>
+                </div>
+                <div style={{paddingTop: "10px"}}>
+                    <button className="btn btn-primary" type="submit" style={{display: "inline-block"}}>submit</button>
+                </div>
             </form>
-
-            <p>Need to create an account?</p>
-            <button onClick={handleClick}>Sign up</button> 
+                <div style={{paddingTop: "15px"}}>
+                    <p className="form-text">Need to create an account?</p>
+                    <button className="btn btn-secondary" onClick={handleClick}>sign up</button> 
+                </div>
         </div>
     );
 }

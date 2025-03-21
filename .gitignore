@@ -1,4 +1,6 @@
 .DS_Store
 .idea
 .env
-frontend/node_modules
+frontend/node_modules/**
+backend/weatherapp/__pycache__/**
+backend/config/__pycache__/**
