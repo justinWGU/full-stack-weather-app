@@ -142,12 +142,14 @@ const App = () => {
       fetch(url)
       .then(response => {
         if (response.ok) {
+          const data = response.json();
           console.log(`Response "ok" from weather server, status: ${response.status}.`);
-          return response.json(); 
+          console.log("Response data from weather server: ", data);
+          return data; 
         }          
         else throw new Error(`Fetch exited with http status code ${response.status}.`);
       })
-      .then(json => setData(json))
+      .then(data => setData(data))
       .catch(errors => console.error("Promise resolved with errors:", errors));
     }
     catch {
