@@ -1,15 +1,16 @@
 import React from "react";
 import '../css/style.css';
 
-const Weather = (data) => {
+const Weather = ({data: weatherData}) => {
 // Represents each weather instance.
-
+        
     // TODO: implement favorite & del button
-    if (data) { 
+    if (weatherData) { 
         
         // TODO: simplify destrucuture method of data prop
         const { location:{name: city, region: state, country, temp_f: temp},
-                current:{wind_mph: wind, condition:{text: conditions, icon}} } = data;
+                current:{wind_mph: wind, condition:{text: conditions, icon}} } = weatherData;
+
         return (
             <div className="grid text-center weather-div">
                 <p>City: {city}</p>
@@ -25,6 +26,9 @@ const Weather = (data) => {
                 </div>
             </div>
         );
+    }
+    else {
+        return (<h2>Data Empty</h2>);
     }
 }
 export default Weather;
