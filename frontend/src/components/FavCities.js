@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const FavCities = ({ token }) => {
+const FavCities = ({token}) => {
     const[favCities, setFavCities] = useState([]);
 
     // TODO: figure out how to pass userEffect as prop

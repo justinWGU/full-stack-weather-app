@@ -1,9 +1,12 @@
 import React from "react";
 import '../css/style.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 
-const Register = ({ handleRegisterClick, changeLogIn, setRegistration, setUsername, setConfirmPassword, setPassword, username, password, confirmPassword  }) => {
+const Register = ({ changeLogIn, setUsername, setConfirmPassword, setPassword, username, password, confirmPassword  }) => {
 // Represents sign up page for first time users.
+
+const navigate = useNavigate();
 
 // submits form data to backend
 const handleSubmit = (event) => {
@@ -29,8 +32,8 @@ const handleSubmit = (event) => {
       }) 
       .then(response => {
         if (response.ok) {
+          navigate("/signin");
           console.log("Registration successful. Response \"ok\" from Django server.");
-          setRegistration(true);
           return response.json();
         }
         else {
@@ -70,9 +73,8 @@ const handleSubmit = (event) => {
                 <button className="btn btn-primary" type="submit">submit</button>
                 </div>
             </form>
-            <div className="route-button">
-                <p className="form-text">Already have an account?</p>
-                <button className="btn btn-secondary" onClick={handleRegisterClick}>log in</button>
+            <div>
+                <p className="form-text">Already have an account? <Link to="/login">Log in</Link></p>
             </div>
         </div>
     );

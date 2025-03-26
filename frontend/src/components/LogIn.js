@@ -1,8 +1,12 @@
 import React from "react";
 import '../css/style.css';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 // Ingests login info and authenticates with a backend.
-const LogIn = ({ setAuth, setToken, setUsername, setPassword, handleClick, handleChange, username, password}) => {
+const LogIn = ({ setToken, setUsername, setPassword, handleChange, username, password}) => {
+
+  const navigate = useNavigate();
 
   // submits login information to backend for authentication.
   const handleSubmit = (event) => {
@@ -23,6 +27,7 @@ const LogIn = ({ setAuth, setToken, setUsername, setPassword, handleClick, handl
       })
       .then(response => {
         if (response.ok) {
+          navigate("/weather");
           console.log("Log in successful. Response \"ok\" from Django server.");
           return response.json(); 
         } 
@@ -33,7 +38,6 @@ const LogIn = ({ setAuth, setToken, setUsername, setPassword, handleClick, handl
       })
       .then(data => {
         console.log("Response data: ", data); // This should return a token.
-        if (data.token) setAuth(true);
         setToken(data.token);
       })
       .catch(errors => console.error("Promise resolved with errors.", errors));
@@ -64,10 +68,9 @@ const LogIn = ({ setAuth, setToken, setUsername, setPassword, handleClick, handl
                     <button className="btn btn-primary" type="submit">submit</button>
                 </div>
             </form>
-                <div className="route-button">
-                    <p className="form-text">Need to create an account?</p>
-                    <button className="btn btn-secondary" onClick={handleClick}>sign up</button> 
-                </div>
+            <div>
+                <p className="form-text">Need to create an account? <Link to="/register">Register here</Link></p>
+            </div>
         </div>
     );
 }

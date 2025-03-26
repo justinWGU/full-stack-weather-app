@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import '../css/style.css';
+import FavCities from "./FavCities";
+import Weather from "./Weather";
 
-const InputBox = ({setData}) => { // not sure what the diff is when using '{}'
+const InputBox = ({setData, data, token}) => { // not sure what the diff is when using '{}'
 // Handles input box for entering city.
 const [city, setCity] = useState(null);
 
@@ -41,6 +43,7 @@ const [city, setCity] = useState(null);
   }
 
     return (
+      <div>
         <div className="text-center">
             <form onSubmit={handleSubmit}>
             <div>
@@ -51,6 +54,9 @@ const [city, setCity] = useState(null);
             <button className="btn btn-primary" type="submit">submit</button>
             </div>
             </form>
+        </div>
+        {data&& <Weather data={data} token={token}></Weather>}
+        {token&& <FavCities token={token}></FavCities>}
         </div>
     );
 }
