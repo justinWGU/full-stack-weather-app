@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 const FavCities = ({token}) => {
+
+    console.log("favCities rendered")
     const[favCities, setFavCities] = useState([]);
 
-    // TODO: figure out how to pass userEffect as prop
     // get user's fav cities, add them to a list, then display them
     useEffect( () => {
+    
         fetch("http://localhost:8000/api/get-cities/", {
             method: "GET",
             headers: {"Content-Type": "application/json", "Authorization": `Token ${token}`}
         })
         .then(response => {
-            console.log("Repsonse: ", response)
+            console.log("Response from http://localhost:8000/api/get-cities/: ", response);
             return response.json();
         })
         .then(data => {

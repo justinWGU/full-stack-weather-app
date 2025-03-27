@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import '../css/style.css';
 import FavCities from "./FavCities";
 import Weather from "./Weather";
+import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-const InputBox = ({setData, data, token}) => { // not sure what the diff is when using '{}'
+
+const InputBox = ({ setToken, setData, data, token }) => { // not sure what the diff is when using '{}'
 // Handles input box for entering city.
+
+const navigate = useNavigate();
+
 const [city, setCity] = useState(null);
 
 
@@ -24,6 +30,7 @@ const [city, setCity] = useState(null);
       fetch(url)
       .then(response => {
         if (response.ok) {
+          navigate(`/weather/${city}`);
           const data = response.json();
           console.log(`Response "ok" from weather server, status: ${response.status}.`);
           console.log("Response data from weather server: ", data);
@@ -55,8 +62,9 @@ const [city, setCity] = useState(null);
             </div>
             </form>
         </div>
-        {data&& <Weather data={data} token={token}></Weather>}
-        {token&& <FavCities token={token}></FavCities>}
+        <Outlet />
+        {/* {data&& <Weather data={data} token={token}></Weather>}
+        {token&& <FavCities token={token}></FavCities>} */}
         </div>
     );
 }

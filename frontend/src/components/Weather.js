@@ -1,9 +1,13 @@
 import React from "react";
 import '../css/style.css';
+import { Link, useParams } from "react-router-dom";
 
 const Weather = ({data: weatherData}) => {
 // Represents each weather instance.
-        
+    const { id } = useParams();
+    console.log("City: ", id);
+    
+    console.log("Weather rendered.")
     // TODO: implement favorite & del button
     if (weatherData) { 
         
@@ -13,6 +17,7 @@ const Weather = ({data: weatherData}) => {
 
         return (
             <div className="grid text-center weather-div">
+                <h4>{id}</h4>
                 <p>City: {city}</p>
                 <p>State: {state}</p>
                 <p>Country: {country}</p>
@@ -23,6 +28,9 @@ const Weather = ({data: weatherData}) => {
                 <div>
                     <button className="btn btn-primary">Favorite</button>
                     <button className="btn btn-danger">X</button>
+                </div>
+                <div>
+                    <Link to="/weather">Back to Favorite Cities</Link>
                 </div>
             </div>
         );

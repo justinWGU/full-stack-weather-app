@@ -48,7 +48,7 @@ const LogIn = ({ setToken, setUsername, setPassword, handleChange, username, pas
     finally {
         setUsername(null);
         setPassword(null);
-        setToken(null);
+        // setToken(null);
     }
   }
 

@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import InputBox from './components/InputBox.js';
 import LogIn from './components/LogIn.js';
 import Register from './components/Register.js';
-import { Routes, Route } from 'react-router-dom';
+import Weather from './components/Weather.js';
+import FavCities from './components/FavCities.js';
+import NotFound from "./components/NotFound.js";
+import Nav from "./components/Nav.js";
+import { Routes, Route, Link } from 'react-router-dom';
 
 
 
@@ -31,20 +35,24 @@ const App = () => {
     }
 
   // Uses state to determine if user only needs to login.
-  // if (!token) {
-  //   return (
-  //     <LogIn handleChange={handleChange} setToken={setToken} setPassword={setPassword} setUsername={setUsername} token={token} username={username} password={password}></LogIn>
-  //   );
-  // }
+  if (!token) {
+    return (
+      <LogIn handleChange={handleChange} setToken={setToken} setPassword={setPassword} setUsername={setUsername} token={token} username={username} password={password}></LogIn>
+    );
+  }
 
   // Displays user's three favorited cities plus queried city. 
   return (
     <div>
-      <h1>Weather App</h1>
+      <Nav></Nav>
       <Routes>
-        <Route path="/weather" element={<InputBox setData={setData} data={data} token={token} />} /> {/* Component drilling */}
+        <Route path="/weather" element={<InputBox setToken={setToken} setData={setData} data={data} token={token} />}> {/* Component drilling */}
+          <Route index element={<FavCities token={token} />}></Route>
+          <Route path=":id" element={<Weather data={data} token={token} />}></Route>
+        </Route>
         <Route path="/register" element={<Register setUsername={setUsername} setPassword={setPassword} setConfirmPassword={setConfirmPassword} username={username} password={password} confirmPassword={confirmPassword} changeLogIn={handleChange} />} />
         <Route path="/login" element={<LogIn handleChange={handleChange} setToken={setToken} setPassword={setPassword} setUsername={setUsername} token={token} username={username} password={password} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>    
   );
