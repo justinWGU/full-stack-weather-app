@@ -7,17 +7,19 @@ import Weather from './components/Weather.js';
 import FavCities from './components/FavCities.js';
 import NotFound from "./components/NotFound.js";
 import Nav from "./components/Nav.js";
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import useToken from './hooks/useToken.js';
 
 
 
 // Main app that establishes core logic.     
 const App = () => {
-  const [token, setToken] = useState(null);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [data, setData] = useState(null);
+  // const [token, setToken] = useState(null);
+
 
     // update username & pw as user types
     const handleChange = (event) => {
@@ -35,6 +37,9 @@ const App = () => {
     }
 
   // Uses state to determine if user only needs to login.
+  const { token, setToken} = useToken("");
+  console.log("token: ", token);
+
   if (!token) {
     return (
       <LogIn handleChange={handleChange} setToken={setToken} setPassword={setPassword} setUsername={setUsername} token={token} username={username} password={password}></LogIn>

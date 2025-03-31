@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import '../css/style.css';
-import FavCities from "./FavCities";
-import Weather from "./Weather";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
 
-const InputBox = ({ setToken, setData, data, token }) => { // not sure what the diff is when using '{}'
+const InputBox = ({ setData }) => {
 // Handles input box for entering city.
 
 const navigate = useNavigate();
@@ -63,8 +61,6 @@ const [city, setCity] = useState(null);
             </form>
         </div>
         <Outlet />
-        {/* {data&& <Weather data={data} token={token}></Weather>}
-        {token&& <FavCities token={token}></FavCities>} */}
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const FavCities = ({token}) => {
+const FavCities = ({ token }) => {
 
     console.log("favCities rendered")
     const[favCities, setFavCities] = useState([]);

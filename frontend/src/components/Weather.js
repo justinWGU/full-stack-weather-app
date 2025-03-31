@@ -5,9 +5,7 @@ import { Link, useParams } from "react-router-dom";
 const Weather = ({data: weatherData}) => {
 // Represents each weather instance.
     const { id } = useParams();
-    console.log("City: ", id);
     
-    console.log("Weather rendered.")
     // TODO: implement favorite & del button
     if (weatherData) { 
         
