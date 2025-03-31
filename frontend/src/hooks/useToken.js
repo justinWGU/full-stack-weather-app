@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // this func is only used to init setToken state
 const getToken = (initValue) => {
@@ -9,8 +10,10 @@ const getToken = (initValue) => {
   return initValue;
 }
 
+
 // this func will be called on every App.js render
 export default function useToken(initValue) { 
+  const navigate = useNavigate();
   const [token, setToken] = useState(() => getToken(initValue));
 
   const saveToken = (userToken) => {
@@ -18,6 +21,13 @@ export default function useToken(initValue) {
     setToken(userToken); // getToken
   }
 
-  return { token, setToken: saveToken };
+  const resetToken = () => {
+    sessionStorage.removeItem("token");
+    alert("successfully logged out!");
+    navigate("/login");
+    setToken(null);
+  }
+
+  return { token, setToken: saveToken, resetToken };
 
 }
