@@ -1,10 +1,8 @@
 import React from "react";
-import '../css/style.css';
-import { Link, useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 // Ingests login info and authenticates with a backend.
-const LogIn = ({ setToken, setUsername, setPassword, handleChange, username, password}) => {
+const LogIn = ({ setIsRegistered, setToken, setUsername, setPassword, handleChange, username, password}) => {
 
   const navigate = useNavigate();
 
@@ -48,30 +46,31 @@ const LogIn = ({ setToken, setUsername, setPassword, handleChange, username, pas
     finally {
         setUsername(null);
         setPassword(null);
-        // setToken(null);
     }
   }
 
     return (
-        <div className="text-center">
+      <div className="bg-gray-100 max-h-full">
+        <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-lg">
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label className="form-text">Enter username</label>
-                    <input className="form-text" type="text" value={username || ""} name="username" onChange={handleChange}></input>
+                <div className="mb-3">
+                    <label className="block text-sm font-medium">Username</label>
+                    <input className="block border-2 border-gray-400 rounded" type="text" value={username || ""} name="username" onChange={handleChange}></input>
                 </div>
-                <div>
-                    <label className="form-text">Enter password</label>
-                    <input className="form-text" type="password" value={password || ""} name="password" onChange={handleChange}></input>
+                <div className="mb-3">
+                    <label className="block text-sm font-medium">Password</label>
+                    <input className="block border-2 border-gray-400 rounded" type="password" value={password || ""} name="password" onChange={handleChange}></input>
                 </div>
-                <div className="submit-button">
-                    <button className="btn btn-primary" type="submit">submit</button>
+                <div className="mt-4">
+                    <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" type="submit">submit</button>
                 </div>
             </form>
-            <div>
-                <p className="form-text">Need to create an account? <Link to="/register">Register here</Link></p>
+            <div className="mt-4">
+                <p className="text-sm font-medium">Need to create an account? <a href="" onMouseDown={() => setIsRegistered(false)}>Register here</a></p> 
             </div>
         </div>
+      </div>
     );
 }
 

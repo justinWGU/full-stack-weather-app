@@ -1,13 +1,11 @@
 import React from "react";
 import '../css/style.css';
-import { Link, useNavigate } from 'react-router-dom';
 
 
-const Register = ({ changeLogIn, setUsername, setConfirmPassword, setPassword, username, password, confirmPassword  }) => {
+const Register = ({ setIsRegistered, changeLogIn, setUsername, setConfirmPassword, setPassword, username, password, confirmPassword  }) => {
 // Represents sign up page for first time users.
 
-const navigate = useNavigate();
-
+ 
 // submits form data to backend
 const handleSubmit = (event) => {
     
@@ -32,7 +30,7 @@ const handleSubmit = (event) => {
       }) 
       .then(response => {
         if (response.ok) {
-          navigate("/signin");
+          setIsRegistered(true);
           console.log("Registration successful. Response \"ok\" from Django server.");
           return response.json();
         }
@@ -74,7 +72,7 @@ const handleSubmit = (event) => {
                 </div>
             </form>
             <div>
-                <p className="form-text">Already have an account? <Link to="/login">Log in</Link></p>
+                <p className="form-text">Already have an account? <a href="" onMouseDown={() => setIsRegistered(true)}> Log in</a></p>
             </div>
         </div>
     );
