@@ -3,7 +3,7 @@ import '../css/style.css';
 import { useParams } from "react-router-dom";
 
 
-export default function Weather({ data:weatherData }) {
+export default function Weather({ weatherData }) {
 // Represents each weather instance.
 
     const { id } = useParams();
@@ -11,8 +11,8 @@ export default function Weather({ data:weatherData }) {
     // TODO: implement favorite & del button 
     if (weatherData) { 
         // TODO: simplify destrucuture method of data prop
-        const { location:{name: city, region: state, country, temp_f: temp},
-                current:{wind_mph: wind, condition:{text: conditions, icon}} } = weatherData;
+        const { location:{name: city, region: state, country},
+                current:{temp_f: temp, wind_mph: wind, condition:{text: conditions, icon}} } = weatherData;
 
         return (
             <div className="grid text-center weather-div">

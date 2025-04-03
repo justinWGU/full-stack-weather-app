@@ -3,11 +3,12 @@ import '../css/style.css';
 import { useNavigate } from "react-router-dom";
 
 
-export default function InputBox ({ setData }) {
+export default function InputBox ({ setWeatherData }) {
 // Handles input box for entering city.
 
 const navigate = useNavigate();
 const [city, setCity] = useState(null);
+
 
   // Updates city input box.
   const handleChange = (event) => {
@@ -16,22 +17,23 @@ const [city, setCity] = useState(null);
   }
 
   // Queries city weather data and resets city input box. 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    try {
-      const url = `http://api.weatherapi.com/v1/current.json?key=e77503e6c87a4abf9eb203542242908&q=${city}`;
-      const response = await fetch(url);
-      const responseData = await response.json();
-      setData(responseData);
-      navigate(`/weather/${city}`);
-    }
-    catch (err) {
-      console.error(`Error occurred while fetching data from weather api ${err}`);
-    }
-    finally {
-      setCity(null);    
-    }
+    setWeatherData(city);
+    setCity(null);
+    // try {
+    //   const url = `http://api.weatherapi.com/v1/current.json?key=e77503e6c87a4abf9eb203542242908&q=${city}`;
+    //   const response = await fetch(url);
+    //   const responseData = await response.json();
+    //   setData(responseData);
+    //   navigate(`/weather/${city}`);
+    // }
+    // catch (err) {
+    //   console.error(`Error occurred while fetching data from weather api ${err}`);
+    // }
+    // finally {
+    //   setCity(null);    
+    // }
   }
 
     return (

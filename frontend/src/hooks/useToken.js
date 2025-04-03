@@ -10,7 +10,6 @@ const getToken = (initValue) => {
   return initValue;
 }
 
-
 // this func will be called on every App.js render
 export default function useToken(initValue) { 
   const navigate = useNavigate();
