@@ -35,7 +35,6 @@ const LogIn = ({ setIsRegistered, setToken, setUsername, setPassword, handleChan
         }
       })
       .then(data => {
-        console.log("Response data: ", data); // This should return a token.
         setToken(data.token);
       })
       .catch(errors => console.error("Promise resolved with errors.", errors));

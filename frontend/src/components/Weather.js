@@ -1,14 +1,15 @@
 import React from "react";
 import '../css/style.css';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const Weather = ({data: weatherData}) => {
+
+export default function Weather({ data:weatherData }) {
 // Represents each weather instance.
+
     const { id } = useParams();
     
-    // TODO: implement favorite & del button
+    // TODO: implement favorite & del button 
     if (weatherData) { 
-        
         // TODO: simplify destrucuture method of data prop
         const { location:{name: city, region: state, country, temp_f: temp},
                 current:{wind_mph: wind, condition:{text: conditions, icon}} } = weatherData;
@@ -27,9 +28,6 @@ const Weather = ({data: weatherData}) => {
                     <button className="btn btn-primary">Favorite</button>
                     <button className="btn btn-danger">X</button>
                 </div>
-                <div>
-                    <Link to="/weather">Back to Favorite Cities</Link>
-                </div>
             </div>
         );
     }
@@ -37,4 +35,3 @@ const Weather = ({data: weatherData}) => {
         return (<h2>Data Empty</h2>);
     }
 }
-export default Weather;

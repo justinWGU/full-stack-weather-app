@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-const FavCities = ({ token }) => {
+export default function FavCities({ token }) {
 
-    console.log("favCities rendered")
+    console.log("Token from fav cities: ", token)
     const[favCities, setFavCities] = useState([]);
 
     // get user's fav cities, add them to a list, then display them
@@ -17,7 +17,7 @@ const FavCities = ({ token }) => {
             return response.json();
         })
         .then(data => {
-            console.log("data: ", data.cities);
+            console.log("Fav city data: ", data.cities);
             setFavCities(data.cities)
         })
         .catch(error => console.error(error));
@@ -36,4 +36,3 @@ const FavCities = ({ token }) => {
         </div>
     );
 }
-export default FavCities;
