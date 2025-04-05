@@ -8,5 +8,6 @@ urlpatterns = [
     path("privileged/", views.privileged_view),
     path("signup/", views.signup),
     path("get-cities/", views.get_cities),
-    path("add-city/", views.add_city)
+    path("add-city/", views.add_city),
+    path("remove-city/", views.remove_city)
 ]
