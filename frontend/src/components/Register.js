@@ -1,11 +1,9 @@
 import React from "react";
-import '../css/style.css';
 
 
-const Register = ({ setIsRegistered, changeLogIn, setUsername, setConfirmPassword, setPassword, username, password, confirmPassword  }) => {
+export default function Register({ setIsRegistered, changeLogIn, setUsername, setConfirmPassword, setPassword, username, password, confirmPassword }) {
 // Represents sign up page for first time users.
 
- 
 // submits form data to backend
 const handleSubmit = (event) => {
     
@@ -52,30 +50,30 @@ const handleSubmit = (event) => {
     }
   }   
     return (
-        <div className="text-center">
+      <div className="bg-gray-100 max-h-full">
+        <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-lg">
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label className="form-text">Enter username</label>
-                    <input className="form-text" type="text" value={username || ""} name="username" onChange={changeLogIn}></input>
+                <div className="mb-3">
+                    <label className="block text-sm font-medium">Username</label>
+                    <input className="block border-2 border-gray-400 rounded" type="text" value={username || ""} name="username" onChange={changeLogIn}></input>
                 </div>
-                <div>
-                    <label className="form-text">Enter password</label>
-                    <input className="form-text" type="password" value={password || ""} name="password" onChange={changeLogIn}></input>
+                <div className="mb-3">
+                    <label className="block text-sm font-medium">Password</label>
+                    <input className="block border-2 border-gray-400 rounded" type="password" value={password || ""} name="password" onChange={changeLogIn}></input>
                 </div>
-                <div>
-                    <label className="form-text">Confirm password</label>
-                    <input className="form-text" type="password" value={confirmPassword || ""} name="confirmPassword" onChange={changeLogIn}></input>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium">Confirm password</label>
+                    <input className="block border-2 border-gray-400 rounded" type="password" value={confirmPassword || ""} name="confirmPassword" onChange={changeLogIn}></input>
                 </div>
-                <div className="submit-button">
-                <button className="btn btn-primary" type="submit">submit</button>
+                <div className="mb-3">
+                <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" type="submit">submit</button>
                 </div>
             </form>
             <div>
-                <p className="form-text">Already have an account? <a href="" onMouseDown={() => setIsRegistered(true)}> Log in</a></p>
+                <p className="text-sm font-medium">Already have an account? <a href="" onMouseDown={() => setIsRegistered(true)}> Log in</a></p>
             </div>
         </div>
+      </div>
     );
 }
-
-export default Register;

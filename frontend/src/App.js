@@ -12,12 +12,11 @@ import WeatherLayout from "./components/WeatherLayout.js";
 import Nav from './components/Nav.js';
 
 
-
 export default function App() {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-  // const [data, setData] = useState(null);
+  const [favCities, setFavCities] = useState([]);
   const [isRegistered, setIsRegistered]= useState(false);
 
     // update username & pw as user types
@@ -50,15 +49,15 @@ export default function App() {
 
   // Displays user's three favorited cities plus queried city. 
   return (
-    <div>
-      <Nav></Nav>
+    <div className="h-full bg-gray-100">
       <Routes>
-        <Route path="/weather" element={<WeatherLayout weatherData={weatherData} setWeatherData={setWeatherData} token={token}></WeatherLayout>} >
-          <Route index element={<h1>Index Element</h1>}></Route>
-          <Route path=":id" element={<Weather weatherData={weatherData}/>}></Route>
+        <Route element={<Nav></Nav>}>
+          <Route path="/weather" element={<WeatherLayout setFavCities={setFavCities} favCities={favCities} weatherData={weatherData} setWeatherData={setWeatherData} token={token}></WeatherLayout>} >
+            <Route path=":id" element={<Weather setFavCities={setFavCities} token={token} favCities={favCities} weatherData={weatherData}/>}></Route>
+          </Route>
         </Route>
-        <Route path="/profile" element={<Profile resetToken={resetToken} />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+          <Route path="/profile" element={<Profile resetToken={resetToken} />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>    
   );

@@ -59,7 +59,7 @@ const LogIn = ({ setIsRegistered, setToken, setUsername, setPassword, handleChan
                 </div>
                 <div className="mb-3">
                     <label className="block text-sm font-medium">Password</label>
-                    <input className="block border-2 border-gray-400 rounded" type="password" value={password || ""} name="password" onChange={handleChange}></input>
+                    <input  type="password" value={password || ""} name="password" onChange={handleChange}></input>
                 </div>
                 <div className="mt-4">
                     <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" type="submit">submit</button>

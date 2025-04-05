@@ -4,12 +4,11 @@ import FavCities from "./FavCities";
 import InputBox from "./InputBox";
 
 
-export default function WeatherLayout({ setWeatherData, token }) {
+export default function WeatherLayout({ setFavCities, favCities, setWeatherData, token }) {
   return (
-    <div>
-      <h1>WeatherLayout</h1>
-      <FavCities setWeatherData={setWeatherData} token={token}></FavCities>
+    <div className="">
       <InputBox setWeatherData={setWeatherData} token={token}></InputBox>
+        <FavCities setFavCities={setFavCities} favCities={favCities} setWeatherData={setWeatherData} token={token}></FavCities>
       <Outlet></Outlet>
     </div>
   );

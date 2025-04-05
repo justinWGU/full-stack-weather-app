@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export default function Nav() {
   return (
@@ -9,7 +9,7 @@ export default function Nav() {
           <li><Link to="/profile">Profile</Link></li>
         </ul>
       </nav>
-      <h1>Weather App</h1>
+      <Outlet></Outlet>
     </div>
   );
 }

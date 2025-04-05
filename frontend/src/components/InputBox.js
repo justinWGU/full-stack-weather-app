@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import '../css/style.css';
-import { useNavigate } from "react-router-dom";
 
 
 export default function InputBox ({ setWeatherData }) {
 // Handles input box for entering city.
 
-const navigate = useNavigate();
 const [city, setCity] = useState(null);
 
 
@@ -21,31 +18,16 @@ const [city, setCity] = useState(null);
     event.preventDefault();
     setWeatherData(city);
     setCity(null);
-    // try {
-    //   const url = `http://api.weatherapi.com/v1/current.json?key=e77503e6c87a4abf9eb203542242908&q=${city}`;
-    //   const response = await fetch(url);
-    //   const responseData = await response.json();
-    //   setData(responseData);
-    //   navigate(`/weather/${city}`);
-    // }
-    // catch (err) {
-    //   console.error(`Error occurred while fetching data from weather api ${err}`);
-    // }
-    // finally {
-    //   setCity(null);    
-    // }
   }
 
     return (
-      <div>
+      <div className="ml-auto max-w-sm">
         <div className="text-center">
             <form onSubmit={handleSubmit}>
-            <div>
-                <label className="col-form-label">Enter city name</label>
-                <input className="form-text" type="text" value={city || ""} name="cityName" onChange={handleChange}></input>
-            </div>
-            <div className="city-button"> 
-            <button className="btn btn-primary" type="submit">submit</button>
+            <div >
+                <label className="mr-2 text-xs font-medium">City name</label>
+                <input className="mr-2 border-2 border-gray-400 rounded" type="text" value={city || ""} name="cityName" onChange={handleChange}></input>
+                <button className="text-xs bg-blue-500 text-white font-bold py-.75 px-1 rounded hover:bg-blue-700" type="submit">submit</button>
             </div>
             </form>
         </div>
