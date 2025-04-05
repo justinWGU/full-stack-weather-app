@@ -7,7 +7,7 @@ const LogIn = ({ setIsRegistered, setToken, setUsername, setPassword, handleChan
   const navigate = useNavigate();
 
   // submits login information to backend for authentication.
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
       
     event.preventDefault();
 
@@ -18,29 +18,24 @@ const LogIn = ({ setIsRegistered, setToken, setUsername, setPassword, handleChan
 
     // send api request to django server to authenticate sign in info
     try {
-      fetch("http://localhost:8000/api/signin/", {
+      const response = await fetch("http://localhost:8000/api/signin/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username: username, password: password})
-      })
-      .then(response => {
-        if (response.ok) {
-          navigate("/weather");
-          console.log("Log in successful. Response \"ok\" from Django server.");
-          return response.json(); 
-        } 
-        else {
-          if (response.status === 400) alert("No account with those credentials found.");
-          throw new Error(`Fetch exited with http status code ${response.status}`);
+      });
+      const data = await response.json();
+
+      if (response.status === 400) {
+        alert("No account with those credentials found.");
+        throw new Error(`Fetch exited with http status code ${response.status}`);
         }
-      })
-      .then(data => {
-        setToken(data.token);
-      })
-      .catch(errors => console.error("Promise resolved with errors.", errors));
+      
+      navigate("/weather");
+      console.log("Log in successful. Response \"ok\" from Django server.");
+      setToken(data.token);  
     } 
-    catch {
-        console.error("Promise rejected during fetch."); // catches network/CORS errors
+    catch (err) {
+      console.log("Fetch resolved with errors.", err);
     } 
     finally {
         setUsername(null);
@@ -59,7 +54,7 @@ const LogIn = ({ setIsRegistered, setToken, setUsername, setPassword, handleChan
                 </div>
                 <div className="mb-3">
                     <label className="block text-sm font-medium">Password</label>
-                    <input  type="password" value={password || ""} name="password" onChange={handleChange}></input>
+                    <input className="block border-2 border-gray-400 rounded" type="password" value={password || ""} name="password" onChange={handleChange}></input>
                 </div>
                 <div className="mt-4">
                     <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" type="submit">submit</button>
