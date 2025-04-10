@@ -2,13 +2,12 @@ import './App.css';
 import React, { useState } from 'react';
 import LogIn from './components/LogIn.js';
 import Register from './components/Register.js';
-import Weather from './components/Weather.js';
 import NotFound from "./components/NotFound.js";
 import { Routes, Route } from 'react-router-dom';
 import useToken from './hooks/useToken.js';
 import useUpdateWeather from './hooks/useUpdateWeather.js';
 import Profile from './components/Profile.js';
-import WeatherLayout from "./components/WeatherLayout.js";
+import WeatherContainer from "./components/WeatherContainer.js";
 import Nav from './components/Nav.js';
 
 
@@ -49,12 +48,10 @@ export default function App() {
 
   // Displays user's three favorited cities plus queried city. 
   return (
-    <div className="h-full bg-gray-100">
+    <div>
       <Routes>
         <Route element={<Nav></Nav>}>
-          <Route path="/weather" element={<WeatherLayout setFavCities={setFavCities} favCities={favCities} weatherData={weatherData} setWeatherData={setWeatherData} token={token}></WeatherLayout>} >
-            <Route path=":id" element={<Weather setFavCities={setFavCities} token={token} favCities={favCities} weatherData={weatherData}/>}></Route>
-          </Route>
+          <Route path="/weather" element={<WeatherContainer weatherData={weatherData} setFavCities={setFavCities} favCities={favCities} setWeatherData={setWeatherData} token={token}></WeatherContainer>}></Route>
         </Route>
           <Route path="/profile" element={<Profile resetToken={resetToken} />}></Route>
           <Route path="*" element={<NotFound />}></Route>

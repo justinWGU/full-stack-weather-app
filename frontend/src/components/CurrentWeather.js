@@ -1,9 +1,8 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../images/clear-night.jpeg"
 
 
-export default function Weather({ token, setFavCities, favCities, weatherData }) {
+export default function CurrentWeather({ token, setFavCities, favCities, weatherData }) {
 // Represents each weather instance.
 
     const cityList = [];
@@ -46,9 +45,9 @@ export default function Weather({ token, setFavCities, favCities, weatherData })
             
         }        
         return (
-            <div className="text-white px-3 py-3 rounded-xl shadow-2xl shadow-black inline-block absolute max-w-sm bg-gradient-to-r from-blue-600 to-black">
+            <div className="col-start-2 col-end-4 row-start-2 justify-self-start text-white px-3 py-3 rounded-xl shadow-2xl shadow-black bg-gradient-to-r from-blue-600 to-black">
                 <h4 className="mr-3 inline-block py-0 px-0">{id}</h4> 
-                <img className="inline-block py-0 px-0 size-3/6" src={icon} alt='img of conditions'></img>
+                <img className="inline-block py-0 px-0" src={icon} alt='img of conditions'></img>
                 <p>City: {city}</p>
                 <p>State: {state}</p>
                 <p>Country: {country}</p>
