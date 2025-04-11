@@ -1,5 +1,5 @@
 import React from "react";
-import FavCityList from "./FavCityList";
+import FavCities from "./FavCities";
 import CurrentWeather from "./CurrentWeather";
 import SearchBarContainer from "./SearchBarContainer";
 import HourlyForecast from "./HourlyForecast";
@@ -11,7 +11,7 @@ export default function WeatherContainer({ weatherData, setFavCities, favCities,
   return (
     <div className="grid grid-cols-6">
       <SearchBarContainer setWeatherData={setWeatherData} token={token}></SearchBarContainer>
-      <FavCityList setFavCities={setFavCities} favCities={favCities} setWeatherData={setWeatherData} token={token}></FavCityList>
+      <FavCities setFavCities={setFavCities} favCities={favCities} setWeatherData={setWeatherData} token={token}></FavCities>
       <CurrentWeather setFavCities={setFavCities} token={token} favCities={favCities} weatherData={weatherData}></CurrentWeather>
       <HourlyForecast></HourlyForecast>
       <DailyForecast></DailyForecast>
