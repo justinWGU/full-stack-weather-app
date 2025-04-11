@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CurrentWeather({ token, setFavCities, favCities, weatherData }) {
@@ -10,7 +10,6 @@ export default function CurrentWeather({ token, setFavCities, favCities, weather
         const item = favCities[key].city_name;
         cityList.push(item);
     }
-    const { id } = useParams();
     const navigate = useNavigate();
 
 
@@ -45,15 +44,12 @@ export default function CurrentWeather({ token, setFavCities, favCities, weather
             
         }        
         return (
-            <div className="col-start-2 col-end-4 row-start-2 justify-self-start text-white px-3 py-3 rounded-xl shadow-2xl shadow-black bg-gradient-to-r from-blue-600 to-black">
-                <h4 className="mr-3 inline-block py-0 px-0">{id}</h4> 
-                <img className="inline-block py-0 px-0" src={icon} alt='img of conditions'></img>
-                <p>City: {city}</p>
-                <p>State: {state}</p>
-                <p>Country: {country}</p>
-                <p>Temperature: {temp} farenheit</p>
-                <p>Wind: {wind} mph</p>
-                <p>Conditions: {conditions}</p>
+            <div className="col-start-3 col-end-5 row-start-2  text-white px-3 py-3 rounded-xl shadow-2xl shadow-black bg-gradient-to-r from-blue-600 to-black">
+                <h2 className="inline">{temp}°</h2>
+                <img className="inline" src={icon} alt='img of conditions'></img>
+                <h3>{city}</h3>
+                <p>Wind {wind} mph</p>
+                <p>Conditions {conditions}</p>
                 <div>
                     {!(cityList.includes(city))&&<button onClick={handleAddCity} className="btn btn-primary">Favorite</button>}
                     {cityList.includes(city)&&<button onClick={handleRemoveCity} className="btn btn-danger">X</button>}
