@@ -5,21 +5,19 @@ import FavCityList from "./FavCityList";
 
 
 export default function FavCities({ setFavCities, favCities, setWeatherData, token }) {
-
     // get user's fav cities, add them to a list, then display them
-    useEffect( () => {
     
-        fetch("http://localhost:8000/api/get-cities/", {
+    async function getData() {
+        const response = await fetch("http://localhost:8000/api/get-cities/", {
             method: "GET",
             headers: {"Content-Type": "application/json", "Authorization": `Token ${token}`}
-        })
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            setFavCities(data.cities);
-        })
-        .catch(error => console.error(error));
+        });
+        const data = await response.json();
+        setFavCities(data.cities);
+    }
+
+    useEffect(() => {
+        getData();
     }, [setFavCities, token]);
 
     const cityList = favCities.map(favCity => {
