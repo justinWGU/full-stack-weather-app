@@ -1,5 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import WeatherItemHeader from "./WeatherItemHeader";
+import WeatherItem from "./WeatherItem";
+import WeatherItemImage from "./WeatherItemImage";
+import WeatherButtons from "./WeatherButtons";
 
 
 export default function CurrentWeather({ token, setFavCities, favCities, weatherData }) {
@@ -45,18 +49,12 @@ export default function CurrentWeather({ token, setFavCities, favCities, weather
         }        
         return (
             <div className="col-start-3 col-end-5 row-start-2  text-white px-3 py-3 rounded-xl shadow-2xl shadow-black bg-gradient-to-r from-blue-600 to-black">
-                <h2 className="inline">{temp}°</h2>
-                <img className="inline" src={icon} alt='img of conditions'></img>
-                <h3>{city}</h3>
-                <p>Wind {wind} mph</p>
-                <p>Conditions {conditions}</p>
-                <div>
-                    {!(cityList.includes(city))&&<button onClick={handleAddCity} className="btn btn-primary">Favorite</button>}
-                    {cityList.includes(city)&&<button onClick={handleRemoveCity} className="btn btn-danger">X</button>}
-                </div>
-                <div>
-           
-                </div>
+                <WeatherItemHeader data={temp}></WeatherItemHeader>
+                <WeatherItemHeader data={city}></WeatherItemHeader>
+                <WeatherItemImage src={icon} alt={conditions}></WeatherItemImage>
+                <WeatherItem label={"Wind"} data={wind} units={"mph"}></WeatherItem>
+                <WeatherItem label={"Conditions"} data={conditions}></WeatherItem>
+                <WeatherButtons currentCity={city} cityList={cityList} handleAddCity={handleAddCity} handleRemoveCity={handleRemoveCity}></WeatherButtons>
             </div>
         );
     }
