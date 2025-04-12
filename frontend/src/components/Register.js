@@ -5,7 +5,7 @@ export default function Register({ setIsRegistered, changeLogIn, setUsername, se
 // Represents sign up page for first time users.
 
 // submits form data to backend
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
     
     event.preventDefault();
 
@@ -21,27 +21,23 @@ const handleSubmit = (event) => {
        
     // send api request to django server to authenticate sign up info
     try {
-      fetch("http://localhost:8000/api/signup/", {
-        method: "POST",
-        body: JSON.stringify({username: username, password: password}),
-        headers: {'Content-Type': 'application/json'}    
-      }) 
-      .then(response => {
-        if (response.ok) {
-          setIsRegistered(true);
-          console.log("Registration successful. Response \"ok\" from Django server.");
-          return response.json();
-        }
-        else {
-          if (response.status === 401) alert("Username is already taken.");
-          throw new Error(`Fetch exited with http status code ${response.status}.`);
-        }
-      })
-      .then(data => console.log("Response data: ", data))
-      .catch(errors => console.error("Promise resolved with errors.", errors));
-    } 
-    catch {
-      console.error("Promise rejected during fetch."); // catches network/CORS errors
+      const response = await fetch("http://localhost:8000/api/signup/", {
+                        method: "POST",
+                        body: JSON.stringify({username: username, password: password}),
+                        headers: {'Content-Type': 'application/json'}    
+                      });
+      const data = await response.json();
+      setIsRegistered(true);
+      if (response.ok) {
+        console.log("Registration successful. Response \"ok\" from Django server.");
+      }
+      if (response.status === 401) {
+        alert("Username is already taken.")
+        throw new Error(`Fetch exited with http status code ${response.status}.`);
+      }
+    }
+    catch (err) {
+      console.log("Fetch resolved with errors.", err);
     } 
     finally {
       setPassword(null);
