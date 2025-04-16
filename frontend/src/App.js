@@ -1,14 +1,16 @@
-import "./App.css";
-import React, { useState } from "react";
-import LogIn from "./pages/Login/LogIn.js";
-import Register from "./pages/Signup/Register.js";
-import NotFound from "./pages/NotFound/NotFound.js";
-import { Routes, Route } from "react-router-dom";
-import useToken from "./hooks/useToken.js";
-import useUpdateWeather from "./hooks/useUpdateWeather.js";
-import Profile from "./pages/Profile/Profile.js";
-import WeatherContainer from "./pages/Weather/WeatherContainer.js";
-import Nav from "./components/Nav.js";
+import './App.css';
+import React, { useState } from 'react';
+import LogIn from './pages/Login/LogIn.js';
+import Register from './pages/Signup/Register.js';
+import NotFound from './pages/NotFound/NotFound.js';
+import { Routes, Route } from 'react-router-dom';
+import useToken from './hooks/useToken.js';
+import useUpdateWeather from './hooks/useUpdateWeather.js';
+import Profile from './pages/Profile/Profile.js';
+import WeatherContainer from './pages/Weather/WeatherContainer.js';
+import Nav from './components/Nav.js';
+import { ErrorBoundary } from 'react-error-boundary';
+import FallBack from './pages/FallBack.js';
 
 export default function App() {
   const [username, setUsername] = useState(null);
@@ -22,9 +24,9 @@ export default function App() {
     const inputSource = event.target.name;
     const newInputValue = event.target.value;
 
-    if (inputSource === "username") {
+    if (inputSource === 'username') {
       setUsername(newInputValue);
-    } else if (inputSource === "password") {
+    } else if (inputSource === 'password') {
       setPassword(newInputValue);
     } else {
       setConfirmPassword(newInputValue);
@@ -32,9 +34,9 @@ export default function App() {
   };
 
   // Uses state to determine if user only needs to login.
-  const { token, setToken, resetToken } = useToken("");
-  const { weatherData, setWeatherData } = useUpdateWeather("");
-  console.log("token: ", token);
+  const { token, setToken, resetToken } = useToken('');
+  const { weatherData, setWeatherData } = useUpdateWeather('');
+  console.log('token: ', token);
 
   // control whether user should login or register
   if (!token && !isRegistered) {
@@ -52,16 +54,19 @@ export default function App() {
     );
   } else if (!token) {
     return (
-      <LogIn
-        setIsRegistered={setIsRegistered}
-        handleChange={handleChange}
-        setToken={setToken}
-        setPassword={setPassword}
-        setUsername={setUsername}
-        token={token}
-        username={username}
-        password={password}
-      ></LogIn>
+      // fallback={<div>An unexpected error ocurred</div>}
+      <ErrorBoundary FallbackComponent={FallBack}>
+        <LogIn
+          setIsRegistered={setIsRegistered}
+          handleChange={handleChange}
+          setToken={setToken}
+          setPassword={setPassword}
+          setUsername={setUsername}
+          token={token}
+          username={username}
+          password={password}
+        ></LogIn>
+      </ErrorBoundary>
     );
   }
 

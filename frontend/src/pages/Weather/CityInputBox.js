@@ -13,14 +13,14 @@ export default function CityInputBox({ setWeatherData }) {
   };
 
   // Queries city weather data and resets city input box.
-  const handleClick = (event) => {
+  const search = (event) => {
     event.preventDefault();
     setWeatherData(city);
     setCity(null);
   };
 
   return (
-    <form onSubmit={handleClick}>
+    <form action={search}>
       <div className="bg-gradient-to-r from-blue-600 to-blue-950 px-3 py-3 rounded-xl flex gap-2 justify-end items-center mr-3">
         <input
           className="rounded-full py-1 px-1"
@@ -35,7 +35,7 @@ export default function CityInputBox({ setWeatherData }) {
           src={search_icon}
           alt="Search Icon"
           width="25px"
-          onClick={handleClick}
+          onClick={search}
         />
       </div>
     </form>

@@ -2,6 +2,7 @@ import React from "react";
 import FavCities from "./favcities/FavCities";
 import CurrentWeather from "./weather/CurrentWeather";
 import SearchBarContainer from "./SearchBarContainer";
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function WeatherContainer({
   weatherData,
