@@ -41,16 +41,18 @@ export default function App() {
   // control whether user should login or register
   if (!token && !isRegistered) {
     return (
-      <Register
-        setIsRegistered={setIsRegistered}
-        setUsername={setUsername}
-        setPassword={setPassword}
-        setConfirmPassword={setConfirmPassword}
-        username={username}
-        password={password}
-        confirmPassword={confirmPassword}
-        changeLogIn={handleChange}
-      ></Register>
+      <ErrorBoundary FallbackComponent={FallBack}>
+        <Register
+          setIsRegistered={setIsRegistered}
+          setUsername={setUsername}
+          setPassword={setPassword}
+          setConfirmPassword={setConfirmPassword}
+          username={username}
+          password={password}
+          confirmPassword={confirmPassword}
+          changeLogIn={handleChange}
+        ></Register>
+      </ErrorBoundary>
     );
   } else if (!token) {
     return (
@@ -76,7 +78,7 @@ export default function App() {
       <Routes>
         <Route element={<Nav></Nav>}>
           <Route
-            path="/weather"
+            path='/weather'
             element={
               <WeatherContainer
                 weatherData={weatherData}
@@ -89,10 +91,10 @@ export default function App() {
           ></Route>
         </Route>
         <Route
-          path="/profile"
+          path='/profile'
           element={<Profile resetToken={resetToken} />}
         ></Route>
-        <Route path="*" element={<NotFound />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </div>
   );

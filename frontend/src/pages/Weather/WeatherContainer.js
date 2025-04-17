@@ -1,8 +1,9 @@
-import React from "react";
-import FavCities from "./favcities/FavCities";
-import CurrentWeather from "./weather/CurrentWeather";
-import SearchBarContainer from "./SearchBarContainer";
-import { ErrorBoundary } from "react-error-boundary";
+import React from 'react';
+import FavCities from './favcities/FavCities';
+import CurrentWeather from './weather/CurrentWeather';
+import SearchBarContainer from './SearchBarContainer';
+import { ErrorBoundary } from 'react-error-boundary';
+import FallBack from '../FallBack';
 
 export default function WeatherContainer({
   weatherData,
@@ -12,17 +13,21 @@ export default function WeatherContainer({
   token,
 }) {
   return (
-    <div className="grid grid-cols-6">
-      <SearchBarContainer
-        setWeatherData={setWeatherData}
-        token={token}
-      ></SearchBarContainer>
-      <FavCities
-        setFavCities={setFavCities}
-        favCities={favCities}
-        setWeatherData={setWeatherData}
-        token={token}
-      ></FavCities>
+    <div className='grid grid-cols-6'>
+      <ErrorBoundary FallbackComponent={FallBack}>
+        <SearchBarContainer
+          setWeatherData={setWeatherData}
+          token={token}
+        ></SearchBarContainer>
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={FallBack}>
+        <FavCities
+          setFavCities={setFavCities}
+          favCities={favCities}
+          setWeatherData={setWeatherData}
+          token={token}
+        ></FavCities>
+      </ErrorBoundary>
       <CurrentWeather
         setFavCities={setFavCities}
         token={token}
