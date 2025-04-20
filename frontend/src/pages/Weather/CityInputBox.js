@@ -14,6 +14,7 @@ export default function CityInputBox({ setWeatherData }) {
 
   // Queries city weather data and resets city input box.
   const search = (any, formData) => {
+    const test = { ayo: 'yuuur' };
     const cityName = formData.get('cityName');
     if (!cityName) {
       return {

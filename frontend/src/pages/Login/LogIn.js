@@ -62,20 +62,26 @@ const LogIn = ({
         <h1>Login</h1>
         <form action={loginAction}>
           <div className='mb-3'>
-            <label className='block text-sm font-medium'>Username</label>
+            <label htmlFor='username' className='block text-sm font-medium'>
+              Username
+            </label>
             <input
               className='block border-2 border-gray-400 rounded'
               type='text'
               value={username || ''}
+              id='username'
               name='username'
               onChange={handleChange}
             ></input>
           </div>
           <div className='mb-3'>
-            <label className='block text-sm font-medium'>Password</label>
+            <label htmlFor='password' className='block text-sm font-medium'>
+              Password
+            </label>
             <input
               className='block border-2 border-gray-400 rounded'
               type='password'
+              id='password'
               value={password || ''}
               name='password'
               onChange={handleChange}
